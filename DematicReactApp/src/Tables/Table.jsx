@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, useSortBy, usePagination } from "react-table";
+import { BsFillTrash3Fill, BsPen } from "react-icons/bs";
 
 import "./Table.css";
 
@@ -28,7 +29,7 @@ const Table = ({ data, editData, deleteData }) => {
             },
             { Header: "Enabled", accessor: "enabled",
                 Cell: (props) => {
-                    return <input readOnly type="checkbox" checked={props.value} />
+                    return <input className="form-check-input" readOnly type="checkbox" value={props.value} checked={props.value} />
                 }
             }
         ],
@@ -41,7 +42,7 @@ const Table = ({ data, editData, deleteData }) => {
     headerGroups,
     rows,
     prepareRow
-  } = useTable({ columns, data });
+  } = useTable({ columns, data }, useSortBy);
 
   return (
     <div className="table-container">
@@ -50,7 +51,7 @@ const Table = ({ data, editData, deleteData }) => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}</th>
               ))}
               <th className="Actions">Actions</th>
             </tr>
@@ -64,7 +65,7 @@ const Table = ({ data, editData, deleteData }) => {
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
-                <td><span className="EditFunction" onClick={() => editData(idx)}>Edit</span><span className="DeleteFunction" onClick={() => deleteData(idx)}>Delete</span></td>
+                <td><span className="EditFunction" onClick={() => editData(idx)}><BsPen /></span><span className="DeleteFunction" onClick={() => deleteData(idx)}><BsFillTrash3Fill /></span></td>
               </tr>
             );
           })}

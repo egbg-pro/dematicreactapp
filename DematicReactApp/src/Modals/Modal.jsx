@@ -58,6 +58,7 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
 
   const handleChange = (e) => {
     // Maybe add error handle code here to try dynamic?
+    validateForm();
     if (e.target.name == "enabled") {
         setFormState({ ...formState, [e.target.name]: !formState.enabled });
     } else {
@@ -77,29 +78,30 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
 
   return (
     <div
-      className="modal-container"
+      className="modalContainer"
       onClick={(e) => {
-        if (e.target.className === "modal-container") closeModal();
+        if (e.target.className === "modalContainer") closeModal();
       }}
     >
-      <div className="modal">
+      <div className="modalContent">
         <form>
-
+          <div className="modalTitle"><h3>Please enter your fields here:</h3></div>
           {/* ID */}
           <div className="form-group">
             <label htmlFor="id">ID</label>
-            <input disabled={defaultValue} type="number" min="1" name="id" onChange={handleChange} value={formState.id} />
+            <input className="form-control" disabled={defaultValue} type="number" min="1" name="id" onChange={handleChange} onFocus={validateForm} value={formState.id} />
           </div>
           {/* ID Validation */}
-          {idError != "" && <div className="error">{`Please provide a number value for ID`}</div>}
+          {idError != "" && <div className="error">{`Please provide a unique ID`}</div>}
 
 
           {/* Type */}
           <div className="form-group">
             <label htmlFor="type">Type</label>
-            <select
+            <select className="form-control"
               name="type"
               onChange={handleChange}
+              onFocus={validateForm}
               value={formState.type}
             >
               <option value="none">Please select an option</option>
@@ -117,9 +119,11 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
           {/* Prompt */}
           <div className="form-group">
             <label htmlFor="prompt">Prompt</label>
-            <input type="text"
+            <input className="form-control"
+              type="text"
               name="prompt"
               onChange={handleChange}
+              onFocus={validateForm}
               value={formState.prompt}
             />
           </div>
@@ -130,33 +134,36 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
           {/* Stage */}
           <div className="form-group">
             <label htmlFor="stage">Stage</label>
-            <input type="text"
+            <input className="form-control"
+              type="text"
               name="stage"
               onChange={handleChange}
+              onFocus={validateForm}
               value={formState.stage}
             />
           </div>
           {/* Stage Validation - required and not blank */}
-          {stageError && <div className="error">{`Please include a stage`}</div>}
+          {stageError && <div className="error">{`Please provide a stage`}</div>}
 
 
           {/* Enabled (checkbox) */}
-          <div className="form-group">
-            <label htmlFor="enabled">Enabled</label>
-            <input type="checkbox"
+          <div className="form-group checkbox">
+            <label className="form-check-label" htmlFor="enabled">Enabled</label>
+            <input className="form-check-input" type="checkbox"
               name="enabled"
               onChange={handleChange}
+              onFocus={validateForm}
               value={formState.enabled}
               checked={formState.enabled}
             />
           </div>
-          {/* No Validation for Enabled */}
-          
 
           {/* Submit to add / edit row */}
-          <button type="submit" className="btn" onClick={handleSubmit}>
-            Submit
-          </button>
+          <div className="footerSubmit">
+            <button type="submit" className="btn btn-secondary" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
