@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Table from './Table'
 import Modal from './Modal'
+import ModalConfirmation from './ModalConfirmation'
 
 const App = () => {
   // Table state
@@ -15,6 +16,7 @@ const App = () => {
 
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalConfirmationOpen, setModalConfirmationOpen] = useState(false);
   // Active row state
   const [activeRow, setActiveRow] = useState(null);
 
@@ -24,7 +26,16 @@ const App = () => {
   }
 
   const deleteDataRow = (target) => {
-    setData(data.filter((_, idx) => idx !== target));
+    // open another modal, check response
+    // Set the active row
+    setActiveRow(target);
+    setModalConfirmationOpen(true);
+    // setData(data.filter((_, idx) => idx !== target));
+  }
+
+  const confirmDelete = (target) => {
+    // 0 1 2
+    setData(data.filter((idx) => idx.id !== target.id));
   }
 
   const addDataRow = (row) => {
@@ -76,6 +87,22 @@ const App = () => {
           defaultValue={
             activeRow !== null && data[activeRow]
           }/>
+        )
+      }
+      {
+        modalConfirmationOpen && (
+          <ModalConfirmation
+          closeModal={
+            () => {
+              setModalConfirmationOpen(false);
+              setActiveRow(null);
+            }
+          }
+          onSubmit={ confirmDelete } // Once submitted, delete row
+          defaultValue={
+            activeRow !== null && data[activeRow]
+          }
+          />
         )
       }
     </>
