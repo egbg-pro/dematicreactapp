@@ -7,9 +7,9 @@ import ModalConfirmation from './Modals/ModalConfirmation'
 const App = () => {
   // Table dummy data
   const [data, setData] = useState([
-    { id: 1, type: "Capture Alphanumeric", prompt: "Enter your full name", stage: "Pre-Processing", enabled: true },
-    { id: 2, type: "Prompt Only", prompt: "You've got mail!", stage: "Sent", enabled: false },
-    { id: 3, type: "Boolean", prompt: "Question", stage: "In Progress", enabled: true },
+    { id: 1, type: "Capture Alphanumeric", prompt: "Enter your full name", stage: "Pre-Processing", enabled: 1 },
+    { id: 2, type: "Prompt Only", prompt: "You've got mail!", stage: "Sent", enabled: 0 },
+    { id: 3, type: "Boolean", prompt: "Question", stage: "In Progress", enabled: 1 },
   ]);
 
   // For opening modals
