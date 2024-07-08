@@ -1,8 +1,16 @@
-# React + Vite
+# dematicreactapp
+# Setup
+Once pulled, install the dependencies and execute npm run dev and you should be good to go.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Design
+Went for a basic table structure with some Bootstrap and custom styling. Left the actions (Edit and Delete) to be easily recognisable icons for usability. Both will open a modal component to process their intended updates.
 
-Currently, two official plugins are available:
+Validation is implemented within the Table component and propogated to each of the field components within the Modal Form:
+ID is required to be positive and unique.
+Prompt and Stage are required and will provide error notes if blank.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Table has sorting if clicked on the header of the column.
+
+# Assumptions
+The ID field should be unique and no records should share an ID.
+Table should be easily customisable with columns and content, hence splitting the head and body into separate components from the Table for plug and play.
