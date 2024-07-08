@@ -1,5 +1,5 @@
 # Setup
-Once pulled, install the dependencies and execute npm run dev and you should be good to go.
+Once pulled, install the dependencies and execute "npm run dev" and you should be good to go.
 
 # Design
 Went for a basic table structure with some Bootstrap and custom styling. Left the actions (Edit and Delete) to be easily recognisable icons for usability. Both will open a modal component to process their intended updates.
