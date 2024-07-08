@@ -1,4 +1,3 @@
-# dematicreactapp
 # Setup
 Once pulled, install the dependencies and execute npm run dev and you should be good to go.
 
