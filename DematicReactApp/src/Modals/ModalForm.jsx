@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-
+import IdField from "./Fields/IdField";
+import TypeField from "./Fields/TypeField";
+import PromptField from "./Fields/PromptField";
+import StageField from "./Fields/StageField";
+import EnabledField from "./Fields/EnabledField";
 import "./Modal.css";
 
 // add id list to the props to check for existing ids
-const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
+const ModalForm = ({ rows, closeModal, onSubmit, defaultValue }) => {
   const [formState, setFormState] = useState(
     defaultValue || {
       id: 1,
@@ -58,7 +62,6 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
 
   const handleChange = (e) => {
     // Maybe add error handle code here to try dynamic?
-    validateForm();
     if (e.target.name == "enabled") {
         setFormState({ ...formState, [e.target.name]: !formState.enabled });
     } else {
@@ -86,77 +89,17 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
       <div className="modalContent">
         <form>
           <div className="modalTitle"><h3>Please enter your fields here:</h3></div>
+          
           {/* ID */}
-          <div className="form-group">
-            <label htmlFor="id">ID</label>
-            <input className="form-control" disabled={defaultValue} type="number" min="1" name="id" onChange={handleChange} onFocus={validateForm} value={formState.id} />
-          </div>
-          {/* ID Validation */}
-          {idError != "" && <div className="error">{`Please provide a unique ID`}</div>}
-
-
+          <IdField handleChange={handleChange} formState={formState} disabled={defaultValue} idError={idError} />
           {/* Type */}
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <select className="form-control"
-              name="type"
-              onChange={handleChange}
-              onFocus={validateForm}
-              value={formState.type}
-            >
-              <option value="none">Please select an option</option>
-              <option value="Capture Alphanumeric">Capture Alphanumeric</option>
-              <option value="Capture Float">Capture Float</option>
-              <option value="Capture Date">Capture Date</option>
-              <option value="Prompt Only">Prompt Only</option>
-              <option value="Boolean">Boolean</option>
-            </select>
-          </div>
-          {/* Type Validation - must select an option */}
-          {typeErrror && <div className="error">{`Please select a valid option`}</div>}
-
-
+          <TypeField handleChange={handleChange} formState={formState} typeErrror={typeErrror} />
           {/* Prompt */}
-          <div className="form-group">
-            <label htmlFor="prompt">Prompt</label>
-            <input className="form-control"
-              type="text"
-              name="prompt"
-              onChange={handleChange}
-              onFocus={validateForm}
-              value={formState.prompt}
-            />
-          </div>
-          {/* Prompt Validation - required and not blank */}
-          {promptError && <div className="error">{`Please provide a prompt`}</div>}
-
-
+          <PromptField handleChange={handleChange} formState={formState} promptError={promptError} />
           {/* Stage */}
-          <div className="form-group">
-            <label htmlFor="stage">Stage</label>
-            <input className="form-control"
-              type="text"
-              name="stage"
-              onChange={handleChange}
-              onFocus={validateForm}
-              value={formState.stage}
-            />
-          </div>
-          {/* Stage Validation - required and not blank */}
-          {stageError && <div className="error">{`Please provide a stage`}</div>}
-
-
+          <StageField handleChange={handleChange} formState={formState} stageError={stageError} />
           {/* Enabled (checkbox) */}
-          <div className="form-group checkbox">
-            <label className="form-check-label" htmlFor="enabled">Enabled</label>
-            <input className="form-check-input" type="checkbox"
-              name="enabled"
-              onChange={handleChange}
-              onFocus={validateForm}
-              value={formState.enabled}
-              checked={formState.enabled}
-            />
-          </div>
+          <EnabledField handleChange={handleChange} formState={formState} />
 
           {/* Submit to add / edit row */}
           <div className="footerSubmit">
@@ -170,4 +113,4 @@ const Modal = ({ rows, closeModal, onSubmit, defaultValue }) => {
   );
 };
 
-export default Modal;
+export default ModalForm;

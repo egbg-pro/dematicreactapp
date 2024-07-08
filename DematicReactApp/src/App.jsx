@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import Table from './Tables/Table'
-import Modal from './Modals/Modal'
+import ModalForm from './Modals/ModalForm'
 import ModalConfirmation from './Modals/ModalConfirmation'
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
   const [data, setData] = useState([
     { id: 1, type: "Capture Alphanumeric", prompt: "Enter your full name", stage: "Pre-Processing", enabled: true },
     { id: 2, type: "Prompt Only", prompt: "You've got mail!", stage: "Sent", enabled: false },
-    { id: 3, type: "Boolean", prompt: "Question", stage: "In Progress", enabled: true }
+    { id: 3, type: "Boolean", prompt: "Question", stage: "In Progress", enabled: true },
   ]);
 
   // For opening modals
@@ -61,7 +61,7 @@ const App = () => {
       <button className='btn btn-secondary mt-2' onClick={() => setModalOpen(true)}>Add</button>
       {
         modalOpen && (
-          <Modal
+          <ModalForm
           rows={ data }
           closeModal={ closeModal }
           onSubmit={ addDataRow }
