@@ -8,11 +8,11 @@ Validation is implemented within the Table component and propogated to each of t
 ID is required to be positive and unique.
 Prompt and Stage are required and will provide error notes if blank.
 
-Table has sorting if clicked on the header of the column. The field Enabled does not currently have sorting.
+Table has sorting if clicked on the header of the column.
 
 # Assumptions
 The ID field should be unique and no records should share an ID.
 Table should be easily customisable with columns and content, hence splitting the head and body into separate components from the Table for plug and play.
 
 # Challenges
-With more time I would focus on implementing pagination and sorting on the Enabled status of items
+With more time I would focus on implementing pagination.
